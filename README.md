@@ -87,6 +87,20 @@ python eval/metrics.py eval/runs/<case>      # 术语一致率/数字保留率/�
 
 对照协议与结果见 `docs/METHOD.md`。
 
+## 提交映射（评测方怎么装）
+
+本仓库**根目录就是 Skill 目录**：评测方把它安装到 `/skills/weekly-skill` 后，`/skills/weekly-skill/SKILL.md` 即为入口，`scripts/` 随之可用。
+
+| 交付要求 | 本仓库位置 |
+| --- | --- |
+| Skill 本体（`SKILL.md` + 实际使用的规则/流程） | `SKILL.md`（七步流程、硬规则、异常处置、自检清单） |
+| 运行必需的脚本与资源 | `scripts/*.py`、`resources/glossary_seed.tsv`、`resources/style_zh.md`、`requirements.txt` |
+| 使用与方法说明 | `README.md`、`docs/USAGE.md`、`docs/METHOD.md`、`docs/LIMITS.md` |
+| 最小调用示例（标注"示例"） | `examples/`（输入 + 可复现脚本 + 示意输出，文件顶部有「示例输出」横幅） |
+| GitHub 链接 | `GITHUB_URL.txt`（第一行仓库链接，第二行 `SKILL.md`） |
+
+运行期不需要联网、不需要 GPU、不下载模型；默认目录即评测契约（`/input`、`/app/work`、`/app/output`）。`dev/` 含受版权保护的论文 PDF，已在 `.gitignore` 中排除，不入库。
+
 ## 许可
 
 MIT。术语种子表可自由替换为你的学科；替换后重跑 `glossary.py suggest` 即可复用整套流程。
