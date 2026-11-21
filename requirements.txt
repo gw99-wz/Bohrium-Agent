@@ -1,0 +1,5 @@
+# 可选依赖：PDF 首选抽取后端。
+# 只有这一项是"装了更好"的依赖；不装时 extract.py 会自动回退到 pdftotext（poppler-utils），
+# 两者都没有时会返回 no_pdf_extractor 并给出处置说明，不会静默产出空结果。
+# 核心流程（common/segment/glossary/packet/check/render/run）只用 Python 标准库。
+pymupdf>=1.24

@@ -1,0 +1,321 @@
+{
+  "case_id": "example-mini",
+  "status": "success",
+  "status_text": "成功：全部段落已翻译并通过校验",
+  "skill": {
+    "name": "paper-translate",
+    "version": "1.0.0"
+  },
+  "input": {
+    "case_json": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\input\\case.json",
+    "task_md": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\input\\task.md",
+    "material": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\input\\material.md",
+    "material_sha256": "ee60792c397461d6213e909e24b109ad3b48d17e4603fc433cbacb12e2d3303a",
+    "pages": 1,
+    "language_pair": "en->zh"
+  },
+  "summary": {
+    "segments": 5,
+    "translated": 5,
+    "glossary_terms": 9,
+    "rates": {
+      "completeness": 1.0,
+      "segment_coverage": 1.0,
+      "glossary_consistency": 1.0,
+      "number_accuracy": 1.0,
+      "citation_accuracy": 1.0,
+      "reference_accuracy": 1.0
+    },
+    "checks_pass": true,
+    "issue_counts": {}
+  },
+  "output_contract": {
+    "translation": "# example-mini（中文译文）\n\n**一份用于演示最小调用流程的样例文本**\n\n\n\n## 摘要\n\n我们测量了厚度为 3 层的二维晶体的光学响应。测得带隙为 1.29 eV，比体材料的数值大 0.6 eV [12]。在硅衬底上生长的样品中，10 K 下未观察到光致发光（图 2a）。\n\n\n## 结果\n\n拉曼光谱给出的单层线宽为 2.4 cm-1，并且样品仅在 350 K 以下稳定。与早期工作 [7, 8] 相比，我们未检测到任何可测量的激子结合能移动。\n",
+    "bilingual": "# 双语对照（段落级）\n\n- 案例：`example-mini`\n- 源文件：material.md\n- 段数：5　已译：5\n- 术语一致率：1.0　数字准确率：1.0　引用准确率：1.0\n- 校验结论：通过\n\n> 段号由 `scripts/segment.py` 分配，与 `segments.jsonl` 一一对应；`pN` 为原文页码。\n\n\n## §Title\n\n**S0001 · p1 · title**\n\n> A minimal fixture for the paper-translate pipeline\n\n一份用于演示最小调用流程的样例文本\n\n*译法依据：标题按陈述句译出*\n\n\n## §Abstract\n\n**S0002 · p1 · heading**\n\n> Abstract\n\n摘要\n\n*译法依据：Abstract 作“摘要”*\n\n**S0003 · p1 · paragraph**\n\n> We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band gap was found to be 1.29 eV, which is 0.6 eV larger than the bulk value [12]. Photoluminescence was not observed at 10 K in samples grown on a silicon substrate (Fig. 2a).\n\n我们测量了厚度为 3 层的二维晶体的光学响应。测得带隙为 1.29 eV，比体材料的数值大 0.6 eV [12]。在硅衬底上生长的样品中，10 K 下未观察到光致发光（图 2a）。\n\n*译法依据：two-dimensional→二维、band gap→带隙、photoluminescence→光致发光，均为锁定译名；Fig. 2a→图 2a*\n\n\n## §Results\n\n**S0004 · p1 · heading**\n\n> Results\n\n结果\n\n*译法依据：Results 作“结果”*\n\n**S0005 · p1 · paragraph**\n\n> Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was only stable below 350 K. In contrast to earlier work [7, 8], we did not detect any measurable exciton binding energy shift.\n\n拉曼光谱给出的单层线宽为 2.4 cm-1，并且样品仅在 350 K 以下稳定。与早期工作 [7, 8] 相比，我们未检测到任何可测量的激子结合能移动。\n\n*译法依据：only below→仅在……以下；in contrast to→与……相比；did not detect→未检测到*\n",
+    "glossary": [
+      {
+        "term_id": "T002",
+        "source": "band gap",
+        "target": "带隙",
+        "first_segment": "S0003",
+        "category": "seed"
+      },
+      {
+        "term_id": "T004",
+        "source": "binding energy",
+        "target": "结合能",
+        "first_segment": "S0005",
+        "category": "seed"
+      },
+      {
+        "term_id": "T005",
+        "source": "exciton",
+        "target": "激子",
+        "first_segment": "S0005",
+        "category": "seed"
+      },
+      {
+        "term_id": "T010",
+        "source": "linewidth",
+        "target": "线宽",
+        "first_segment": "S0005",
+        "category": "seed"
+      },
+      {
+        "term_id": "T011",
+        "source": "monolayer",
+        "target": "单层",
+        "first_segment": "S0005",
+        "category": "seed"
+      },
+      {
+        "term_id": "T014",
+        "source": "photoluminescence",
+        "target": "光致发光",
+        "first_segment": "S0003",
+        "category": "seed"
+      },
+      {
+        "term_id": "T015",
+        "source": "Raman spectroscopy",
+        "target": "拉曼光谱",
+        "first_segment": "S0005",
+        "category": "seed"
+      },
+      {
+        "term_id": "T019",
+        "source": "substrate",
+        "target": "衬底",
+        "first_segment": "S0003",
+        "category": "seed"
+      },
+      {
+        "term_id": "T021",
+        "source": "two-dimensional",
+        "target": "二维",
+        "first_segment": "S0003",
+        "category": "seed"
+      }
+    ],
+    "evidence": [
+      {
+        "segment_id": "S0001",
+        "page": 1,
+        "page_end": 1,
+        "section": "Title",
+        "kind": "title",
+        "block_ids": [
+          "g000"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0002",
+        "page": 1,
+        "page_end": 1,
+        "section": "Abstract",
+        "kind": "heading",
+        "block_ids": [
+          "g001"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0003",
+        "page": 1,
+        "page_end": 1,
+        "section": "Abstract",
+        "kind": "paragraph",
+        "block_ids": [
+          "g002"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0004",
+        "page": 1,
+        "page_end": 1,
+        "section": "Results",
+        "kind": "heading",
+        "block_ids": [
+          "g003"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0005",
+        "page": 1,
+        "page_end": 1,
+        "section": "Results",
+        "kind": "paragraph",
+        "block_ids": [
+          "g004"
+        ],
+        "translated": true
+      }
+    ],
+    "status": "success"
+  },
+  "evidence": {
+    "segments": [
+      {
+        "segment_id": "S0001",
+        "page": 1,
+        "page_end": 1,
+        "section": "Title",
+        "kind": "title",
+        "block_ids": [
+          "g000"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0002",
+        "page": 1,
+        "page_end": 1,
+        "section": "Abstract",
+        "kind": "heading",
+        "block_ids": [
+          "g001"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0003",
+        "page": 1,
+        "page_end": 1,
+        "section": "Abstract",
+        "kind": "paragraph",
+        "block_ids": [
+          "g002"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0004",
+        "page": 1,
+        "page_end": 1,
+        "section": "Results",
+        "kind": "heading",
+        "block_ids": [
+          "g003"
+        ],
+        "translated": true
+      },
+      {
+        "segment_id": "S0005",
+        "page": 1,
+        "page_end": 1,
+        "section": "Results",
+        "kind": "paragraph",
+        "block_ids": [
+          "g004"
+        ],
+        "translated": true
+      }
+    ],
+    "coverage": {
+      "chars_extracted": 457,
+      "chars_in_segments": 457,
+      "char_ratio": 1.0,
+      "segments": 5,
+      "furniture_blocks_dropped": 0,
+      "images": 0
+    }
+  },
+  "glossary": [
+    {
+      "term_id": "T002",
+      "source": "band gap",
+      "target": "带隙",
+      "first_segment": "S0003",
+      "category": "seed"
+    },
+    {
+      "term_id": "T004",
+      "source": "binding energy",
+      "target": "结合能",
+      "first_segment": "S0005",
+      "category": "seed"
+    },
+    {
+      "term_id": "T005",
+      "source": "exciton",
+      "target": "激子",
+      "first_segment": "S0005",
+      "category": "seed"
+    },
+    {
+      "term_id": "T010",
+      "source": "linewidth",
+      "target": "线宽",
+      "first_segment": "S0005",
+      "category": "seed"
+    },
+    {
+      "term_id": "T011",
+      "source": "monolayer",
+      "target": "单层",
+      "first_segment": "S0005",
+      "category": "seed"
+    },
+    {
+      "term_id": "T014",
+      "source": "photoluminescence",
+      "target": "光致发光",
+      "first_segment": "S0003",
+      "category": "seed"
+    },
+    {
+      "term_id": "T015",
+      "source": "Raman spectroscopy",
+      "target": "拉曼光谱",
+      "first_segment": "S0005",
+      "category": "seed"
+    },
+    {
+      "term_id": "T019",
+      "source": "substrate",
+      "target": "衬底",
+      "first_segment": "S0003",
+      "category": "seed"
+    },
+    {
+      "term_id": "T021",
+      "source": "two-dimensional",
+      "target": "二维",
+      "first_segment": "S0003",
+      "category": "seed"
+    }
+  ],
+  "uncertainty": [],
+  "changes": [
+    {
+      "step": "extract",
+      "backend": "text"
+    },
+    {
+      "step": "segment",
+      "segments": 5,
+      "char_ratio": 1.0
+    },
+    {
+      "step": "glossary",
+      "locked_terms": 9,
+      "lock_sha256": "b645de90d2d6d63d7833891f38bf1d31949db165e8776a55ef720b37e4d4b62b"
+    },
+    {
+      "step": "check",
+      "errors": 0,
+      "warnings": 0
+    }
+  ],
+  "artifacts": {
+    "bilingual": "bilingual.md",
+    "translation": "translation.zh.md",
+    "glossary": "glossary.tsv",
+    "verify_report": "verify_report.json",
+    "pending_review": "pending_review.md"
+  },
+  "generated_at": "2026-11-21T11:48:52+0800"
+}

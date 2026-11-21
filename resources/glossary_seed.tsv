@@ -1,0 +1,79 @@
+# 术语种子表（可替换 / 可增补）
+# 列：src<TAB>zh<TAB>category<TAB>note
+# 用法：scripts/glossary.py suggest 会把这些术语在原文中出现过的行直接预填 zh，
+#      仍建议逐条复核，因为同一英文词在不同学科可能对应不同中文名。
+# 适用：凝聚态物理 / 二维材料 / 光谱学；其他学科请替换本文件后重跑 suggest。
+monolayer	单层	2d
+bilayer	双层	2d
+few-layer	少层	2d
+multilayer	多层	2d
+two-dimensional	二维	2d
+van der Waals	范德华	2d
+heterostructure	异质结构	2d
+homojunction	同质结	2d
+band gap	带隙	electronic
+direct band gap	直接带隙	electronic
+indirect band gap	间接带隙	electronic
+valence band	价带	electronic
+conduction band	导带	electronic
+quantum confinement	量子限域	electronic
+exciton	激子	electronic
+trion	带电激子	electronic
+phonon	声子	lattice
+lattice	晶格	lattice
+hexagonal	六方	lattice
+crystal structure	晶体结构	lattice
+grain boundary	晶界	material
+defect	缺陷	material
+strain	应变	mechanics
+in-plane	面内	geometry
+out-of-plane	面外	geometry
+mechanical exfoliation	机械剥离	fabrication
+chemical vapor deposition	化学气相沉积	fabrication
+substrate	衬底	fabrication
+annealing	退火	fabrication
+lithography	光刻	fabrication
+etching	刻蚀	fabrication
+dielectric	介电	device
+gate voltage	栅压	device
+field-effect transistor	场效应晶体管	device
+mobility	迁移率	device
+carrier	载流子	transport
+doping	掺杂	transport
+photoluminescence	光致发光	spectroscopy
+photoconductivity	光电导	spectroscopy
+absorbance	吸光度	spectroscopy
+absorption spectrum	吸收光谱	spectroscopy
+Raman spectroscopy	拉曼光谱	spectroscopy
+atomic force microscopy	原子力显微镜	characterization
+quantum efficiency	量子效率	optics
+quantum yield	量子产率	optics
+circular dichroism	圆二色性	optics
+polarization	偏振	optics
+wavelength	波长	optics
+photon energy	光子能量	optics
+transmittance	透过率	optics
+linewidth	线宽	spectroscopy
+full width at half maximum	半高全宽	spectroscopy
+signal-to-noise ratio	信噪比	measurement
+order of magnitude	数量级	measurement
+room temperature	室温	measurement
+ambient conditions	环境条件	measurement
+normalized	归一化	measurement
+arbitrary units	任意单位	measurement
+charge density wave	电荷密度波	condensed
+phase transition	相变	condensed
+superconductivity	超导	condensed
+spin-orbit coupling	自旋轨道耦合	condensed
+valley polarization	谷极化	condensed
+Fermi level	费米能级	condensed
+Brillouin zone	布里渊区	condensed
+density functional theory	密度泛函理论	method
+first-principles	第一性原理	method
+tight-binding	紧束缚	method
+binding energy	结合能	physics
+supplementary information	补充材料	paper
+corresponding author	通讯作者	paper
+peer review	同行评审	paper
+in situ	原位	paper
+room-temperature	室温	paper

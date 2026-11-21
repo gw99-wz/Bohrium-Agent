@@ -1,0 +1,10 @@
+{
+  "_note": "术语变体表。locked 是本 Skill 锁定的译名，variants 是同一英文术语在中文学术文献里常见的其他写法。用于统计'同一术语出现了几种译名'。",
+  "band gap": {"locked": "带隙", "variants": ["带隙", "能带带隙", "能带间隙", "禁带宽度", "带隙宽度"]},
+  "monolayer": {"locked": "单层", "variants": ["单层", "单分子层", "单原子层", "单层膜"]},
+  "photoluminescence": {"locked": "光致发光", "variants": ["光致发光", "光荧光", "光致发光谱"]},
+  "quantum confinement": {"locked": "量子限域", "variants": ["量子限域", "量子限制", "量子局域"]},
+  "quantum efficiency": {"locked": "量子效率", "variants": ["量子效率", "量子产率"]},
+  "molybdenum disulfide": {"locked": "二硫化钼", "variants": ["二硫化钼", "二硫化钼(MoS2)"]},
+  "transition-metal dichalcogenide": {"locked": "过渡金属二硫属化物", "variants": ["过渡金属二硫属化物", "过渡金属硫族化物", "过渡金属二硫化物"]}
+}

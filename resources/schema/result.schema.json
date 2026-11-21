@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "paper-translate result.json",
+  "type": "object",
+  "required": ["case_id", "status", "input", "summary", "output_contract", "evidence", "glossary", "uncertainty", "artifacts"],
+  "properties": {
+    "case_id": {"type": "string", "description": "来自 case.json 的 case_id；缺失时用材料文件名派生"},
+    "status": {"enum": ["success", "partial", "unable", "refused"]},
+    "status_text": {"type": "string"},
+    "skill": {
+      "type": "object",
+      "properties": {"name": {"type": "string"}, "version": {"type": "string"}}
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "case_json": {"type": ["string", "null"]},
+        "task_md": {"type": ["string", "null"]},
+        "material": {"type": ["string", "null"]},
+        "material_sha256": {"type": ["string", "null"]},
+        "pages": {"type": ["integer", "null"]},
+        "language_pair": {"type": "string"}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["segments", "translated", "rates"],
+      "properties": {
+        "segments": {"type": "integer"},
+        "translated": {"type": "integer"},
+        "glossary_terms": {"type": "integer"},
+        "rates": {
+          "type": "object",
+          "properties": {
+            "completeness": {"type": "number"},
+            "segment_coverage": {"type": "number"},
+            "glossary_consistency": {"type": "number"},
+            "number_accuracy": {"type": "number"},
+            "citation_accuracy": {"type": "number"},
+            "reference_accuracy": {"type": "number"}
+          }
+        },
+        "checks_pass": {"type": "boolean"},
+        "issue_counts": {"type": "object", "additionalProperties": {"type": "integer"}}
+      }
+    },
+    "output_contract": {
+      "type": "object",
+      "description": "case.json 中 output_contract 声明的每个字段；无法填充时为 null，并在 contract_notes/uncertainty 说明",
+      "additionalProperties": true
+    },
+    "contract_notes": {"type": "array", "items": {"type": "string"}},
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["segment_id", "page", "section", "kind", "block_ids"],
+            "properties": {
+              "segment_id": {"type": "string", "pattern": "^S[0-9]{4}$"},
+              "page": {"type": "integer"},
+              "page_end": {"type": "integer"},
+              "section": {"type": "string"},
+              "kind": {"type": "string"},
+              "block_ids": {"type": "array", "items": {"type": "string"}},
+              "translated": {"type": "boolean"}
+            }
+          }
+        },
+        "coverage": {"type": "object"}
+      }
+    },
+    "glossary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "term_id": {"type": "string"},
+          "source": {"type": "string"},
+          "target": {"type": "string"},
+          "first_segment": {"type": "string"},
+          "category": {"type": "string"}
+        }
+      }
+    },
+    "uncertainty": {"type": "array", "items": {"type": "string"}},
+    "changes": {"type": "array", "items": {"type": "object"}},
+    "artifacts": {"type": "object", "additionalProperties": {"type": "string"}},
+    "generated_at": {"type": "string"}
+  }
+}

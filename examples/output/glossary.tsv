@@ -1,0 +1,22 @@
+term_id	src	zh	zh_alt	category	count	first_seg	first_page	status	note	context
+T001	eV			unit	2	S0003	1	skip		yers. The band gap was found to be 1.29 eV, which is 0.6 eV larger than the bulk value [12]. Photolumi
+T002	band gap	带隙		seed	1	S0003	1	locked		ystal with a thickness of 3 layers. The band gap was found to be 1.29 eV, which is 0.6 eV larger than the bu
+T003	band gap was			phrase	1	S0003	1	skip		ystal with a thickness of 3 layers. The band gap was found to be 1.29 eV, which is 0.6 eV larger than the bulk v
+T004	binding energy	结合能		seed	1	S0005	1	locked		e did not detect any measurable exciton binding energy shift.
+T005	exciton	激子		seed	1	S0005	1	locked		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was only stable below 350 K. In cont
+T006	gap was			phrase	1	S0003	1	skip		with a thickness of 3 layers. The band gap was found to be 1.29 eV, which is 0.6 eV larger than the bulk v
+T007	gap was found			phrase	1	S0003	1	skip		with a thickness of 3 layers. The band gap was found to be 1.29 eV, which is 0.6 eV larger than the bulk value [
+T008	layers The			phrase	1	S0003	1	skip		We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band
+T009	layers The band			phrase	1	S0003	1	skip		We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band
+T010	linewidth	线宽		seed	1	S0005	1	locked		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was only stable below 350 K. In cont
+T011	monolayer	单层		seed	1	S0005	1	locked		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was only stable below 350 K. In cont
+T012	monolayer and			phrase	1	S0005	1	skip		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was only stable
+T013	monolayer and the			phrase	1	S0005	1	skip		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was only stable
+T014	photoluminescence	光致发光		seed	1	S0003	1	locked		We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band gap was found to be
+T015	Raman spectroscopy	拉曼光谱		seed	1	S0005	1	locked		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the s
+T016	Raman spectroscopy showed			phrase	1	S0005	1	skip		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample w
+T017	spectroscopy showed			phrase	1	S0005	1	skip		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample w
+T018	spectroscopy showed a			phrase	1	S0005	1	skip		Raman spectroscopy showed a linewidth of 2.4 cm-1 for the monolayer, and the sample was
+T019	substrate	衬底		seed	1	S0003	1	locked		We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band gap was found to be
+T020	thickness of layers			phrase	1	S0003	1	skip		We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band
+T021	two-dimensional	二维		seed	1	S0003	1	locked		We measured the optical response of a two-dimensional crystal with a thickness of 3 layers. The band gap was found to be

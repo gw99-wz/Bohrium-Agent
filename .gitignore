@@ -1,0 +1,25 @@
+# 本地开发与临时产物（含受版权保护的论文 PDF，绝不提交）
+dev/
+tests/_tmp/
+tests/last_run.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# 编辑器/系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 本地凭据（永不提交）
+.git-credentials
+*.token
+
+examples/case/work/
+examples/build_log.txt

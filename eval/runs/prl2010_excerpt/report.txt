@@ -1,0 +1,28 @@
+﻿| 指标 | baseline | skill |
+| --- | --- | --- |
+| 术语一致率（术语只出现一种译法） | 1.000 | 1.000 |
+| 术语变体总数（越少越好） | 7 | 7 |
+| 数字保留率 | 1.000 | 1.000 |
+| 引用标记保留率 | 1.000 | 1.000 |
+| 图表引用本地化率 | 0.000 | 1.000 |
+| 段号可回指率 | 0.000 | 1.000 |
+| 是否标注不确定 | 否 | 是 |
+| 可回指段数 | 0 | 7 |
+
+[baseline] 术语明细：
+  band gap                         出现  6 次，译法 {'带隙': 6}
+  monolayer                        出现  4 次，译法 {'单层': 4}
+  photoluminescence                出现  1 次，译法 {'光致发光': 1}
+  quantum confinement              出现  1 次，译法 {'量子限域': 1}
+  quantum efficiency               出现  1 次，译法 {'量子效率': 1}
+  molybdenum disulfide             出现  1 次，译法 {'二硫化钼': 1}
+  transition-metal dichalcogenide  出现  1 次，译法 {'过渡金属二硫属化物': 1}
+
+[skill] 术语明细：
+  band gap                         出现  6 次，译法 {'带隙': 6}
+  monolayer                        出现  4 次，译法 {'单层': 4}
+  photoluminescence                出现  1 次，译法 {'光致发光': 1}
+  quantum confinement              出现  1 次，译法 {'量子限域': 1}
+  quantum efficiency               出现  1 次，译法 {'量子效率': 1}
+  molybdenum disulfide             出现  1 次，译法 {'二硫化钼': 1}
+  transition-metal dichalcogenide  出现  1 次，译法 {'过渡金属二硫属化物': 1}

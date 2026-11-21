@@ -1,0 +1,12 @@
+{
+  "case_id": "example-mini",
+  "source": "material.md",
+  "task": "把示例文本翻译成中文，术语统一，保留数字、单位与引用。",
+  "output_contract": {
+    "translation": "全文中文译文",
+    "bilingual": "段落级原文-译文对照",
+    "glossary": "术语表（含首现段号）",
+    "evidence": "每段的页码与段号",
+    "status": "运行状态"
+  }
+}

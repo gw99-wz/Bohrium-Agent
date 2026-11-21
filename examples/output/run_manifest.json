@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-11-21T11:48:52+0800",
+  "skill_version": "1.0.0",
+  "python": "3.15.0",
+  "input": {
+    "case_json": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\input\\case.json",
+    "task_md": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\input\\task.md",
+    "material": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\input\\material.md",
+    "material_sha256": "ee60792c397461d6213e909e24b109ad3b48d17e4603fc433cbacb12e2d3303a"
+  },
+  "artifacts": [
+    "bilingual.md",
+    "coverage.json",
+    "glossary.tsv",
+    "pending_review.md",
+    "result.json",
+    "segments.md",
+    "translation.zh.md",
+    "verify_report.json"
+  ],
+  "work_dir": "C:\\Users\\TYTX\\Documents\\deepseek-harness\\default-workspace\\paper-translate\\examples\\case\\work"
+}
