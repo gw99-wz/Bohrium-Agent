@@ -193,6 +193,10 @@ def main(argv=None) -> int:
     payload = build_payload(dirs)
     if not payload["segments"]:
         C.fail("no_segments: 先运行 scripts/segment.py")
+    scope = C.read_json(dirs.work / "scope.json", None)
+    scoped_ids = set(scope.get("ids") or []) if isinstance(scope, dict) else set()
+    if scoped_ids:
+        payload["segments"] = [s for s in payload["segments"] if s["id"] in scoped_ids]
     report = payload["report"]
     rates = report.get("rates", {})
     translated = report.get("translated", len(payload["translations"]))

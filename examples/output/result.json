@@ -219,6 +219,7 @@
       "chars_in_segments": 457,
       "char_ratio": 1.0,
       "segments": 5,
+      "manual_segments": 0,
       "furniture_blocks_dropped": 0,
       "images": 0
     }
@@ -317,5 +318,5 @@
     "verify_report": "verify_report.json",
     "pending_review": "pending_review.md"
   },
-  "generated_at": "2026-11-21T11:48:52+0800"
+  "generated_at": "2026-11-21T11:51:20+0800"
 }

@@ -40,9 +40,21 @@ description: Use when a task asks to translate a scientific paper (PDF, DOCX, Ma
 默认目录已按评测契约设好，一般不需要传参；本地模拟时用 `--input/--work/--output` 覆盖。
 
 ```bash
-SKILL_DIR="$(cd "$(dirname "$0")" && pwd)"   # SKILL.md 所在目录
-python3 "$SKILL_DIR/scripts/run.py" all       # 若只有 python，就换成 python
+S=/skills/weekly-skill                        # 本 SKILL.md 所在目录（本地运行时换成实际路径）
+python3 "$S/scripts/run.py" all                # 只有 python 命令时换成 python
 ```
+
+## 快速路径（想少动手时）
+
+```bash
+python3 "$S/scripts/run.py" all                       # 抽段 + 术语候选（会停在术语表）
+python3 "$S/scripts/glossary.py" lock --seed-only      # 只锁种子表已给译名的术语（约 8–15 条）
+python3 "$S/scripts/packet.py" build                   # 出翻译包
+# ……逐包翻译，写入 work/translation/<packet>.out.jsonl……
+python3 "$S/scripts/run.py" finish                     # 校验 + 出 result.json
+```
+
+时间允许时不要用 `--seed-only`：打开 `work/glossary.tsv`，把**出现次数最多的 20–40 条**术语填上 `zh` 再 `lock`，术语一致性分数会明显更稳。
 
 ## 七步流程
 
@@ -51,7 +63,7 @@ python3 "$SKILL_DIR/scripts/run.py" all       # 若只有 python，就换成 pyt
 ### 1. preflight：先看清材料
 
 ```bash
-python3 "$SKILL_DIR/scripts/preflight.py"
+python3 "$S/scripts/preflight.py"
 ```
 
 产出 `work/preflight.json`：页数、每页字符数、扫描页、是否加密、语言方向、`output_contract` 字段名。
@@ -60,7 +72,7 @@ python3 "$SKILL_DIR/scripts/preflight.py"
 ### 2. extract：版面感知抽取
 
 ```bash
-python3 "$SKILL_DIR/scripts/extract.py"
+python3 "$S/scripts/extract.py"
 ```
 
 按行重建段落：行距比 > 1.35 断段、短末行断段、标题标签断段；双栏按"宽块切带 + 带内分栏"排序；图片/公式/题注/参考文献分区。
@@ -69,18 +81,26 @@ python3 "$SKILL_DIR/scripts/extract.py"
 ### 3. segment：段号与对账
 
 ```bash
-python3 "$SKILL_DIR/scripts/segment.py"
+python3 "$S/scripts/segment.py"
 ```
 
 分配 `S0001…`，剔除页眉页码，把跨栏/跨页断开的段落接回去，输出 `work/coverage.json` 的页级字符对账。
 **判断点**：`coverage_pass` 必须为 `true`；`pages_below_threshold` 非空说明有页漏抽。
 
+某页确实抽不出来时，可以自己补 `work/segments_manual.jsonl`（每行一条）：
+
+```json
+{"page": 4, "text": "该页正文……", "kind": "paragraph", "section": "Results"}
+```
+
+`segment.py` 会把它追加成正式段落（`source=manual`），照样编号、照样计入字符对账、照样参与后续校验。
+
 ### 4. glossary：术语表（本 Skill 的核心）
 
 ```bash
-python3 "$SKILL_DIR/scripts/glossary.py" suggest     # 抽候选 + 用种子表预填
+python3 "$S/scripts/glossary.py" suggest     # 抽候选 + 用种子表预填
 # 打开 work/glossary.tsv，填 zh 列；不打算锁定的行把 status 改成 skip
-python3 "$SKILL_DIR/scripts/glossary.py" lock         # 冻结并记录 sha256
+python3 "$S/scripts/glossary.py" lock         # 冻结并记录 sha256
 ```
 
 TSV 列：`term_id / src / zh / zh_alt / category / count / first_seg / first_page / status / note / context`。
@@ -93,7 +113,7 @@ TSV 列：`term_id / src / zh / zh_alt / category / count / first_seg / first_pa
 ### 5. packet：分批翻译包
 
 ```bash
-python3 "$SKILL_DIR/scripts/packet.py" build
+python3 "$S/scripts/packet.py" build
 ```
 
 按语义边界打包（默认 4500 字符 / 12 段，不切断段落），每个包带：本批命中的锁定术语、上一段结尾、下一段开头、章节与页码。
@@ -104,13 +124,21 @@ python3 "$SKILL_DIR/scripts/packet.py" build
 ```
 
 ```bash
-python3 "$SKILL_DIR/scripts/packet.py" status   # 看还剩哪些包
+python3 "$S/scripts/packet.py" status   # 看还剩哪些包
 ```
+
+任务只要求某一段落区间（例如"只译摘要与第 2 节"）时：
+
+```bash
+python3 "$S/scripts/packet.py" build --only S0001-S0012,S0020
+```
+
+范围会写进 `work/scope.json`，`check.py` 与 `render.py` 只对该范围负责，`result.json` 的 `evidence` 也只覆盖这些段——**不要**用"全文已译"的方式掩盖没译的部分。
 
 ### 6. check：守恒校验（必须过）
 
 ```bash
-python3 "$SKILL_DIR/scripts/check.py" --merge
+python3 "$S/scripts/check.py" --merge
 ```
 
 校验项：段落完整性、术语回填、数字多重集、单位、`[n]` 引用、Fig./Table/Eq. 编号、公式符号、否定/限定词、长度异常。
@@ -120,7 +148,7 @@ python3 "$SKILL_DIR/scripts/check.py" --merge
 ### 7. render：出交付物
 
 ```bash
-python3 "$SKILL_DIR/scripts/render.py"
+python3 "$S/scripts/render.py"
 ```
 
 产出 `output/`：

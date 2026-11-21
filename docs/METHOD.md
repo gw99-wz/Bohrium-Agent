@@ -127,7 +127,33 @@ python scripts/run.py all --input <case>/input --work <case>/work --output <case
 
 `eval/metrics.py` 不调用任何模型：给定 `source.md`、`baseline.md`、`skill.md`（可选 `skill_bilingual.md`），纯正则/计数得出上表，评审可自行重算。
 
-## 5. 与已有做法的边界
+## 5. 中间文件字段
+
+自己接文本（`no_pdf_extractor`）或手工补页时需要写的两个文件：
+
+`work/blocks.jsonl`（每行一个块，段落级）
+
+| 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| `page` | int | 1 起页码 |
+| `pid` | str | 块 id，`p3-l012`/自定义，段内唯一 |
+| `text` | str | 块正文（段内已合并的行） |
+| `size` | float | 正文字号，未知填 0（会退化为启发式） |
+| `bold` | bool | 是否加粗 |
+| `math` | bool | 是否含公式符号/数学字体 |
+| `col` | int | 栏号，单栏填 0 |
+| `bbox` | [x0,y0,x1,y1] | 位置；未知填 `[0,0,0,0]` |
+
+`work/segments_manual.jsonl`（每行一个补充段落）
+
+| 字段 | 必填 | 说明 |
+| --- | --- | --- |
+| `page` | 是 | 该段所在页 |
+| `text` | 是 | 段落正文 |
+| `kind` | 否 | `paragraph`/`heading`/`caption`/`formula`/`table_like`，默认 `paragraph` |
+| `section` | 否 | 所属章节名，默认沿用上一段 |
+
+## 6. 与已有做法的边界
 
 | 做法 | 术语 | 段落 | 守恒 | 回指 | 本 Skill 的差异 |
 | --- | --- | --- | --- | --- | --- |

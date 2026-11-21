@@ -1,8 +1,11 @@
 {
-  "generated_at": "2026-11-21T11:48:52+0800",
+  "generated_at": "2026-11-21T11:51:19+0800",
   "segments": 5,
   "translated": 5,
   "missing": 0,
+  "scope": {
+    "scoped": false
+  },
   "rates": {
     "completeness": 1.0,
     "segment_coverage": 1.0,

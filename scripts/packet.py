@@ -66,10 +66,20 @@ def build_batches(segments: list[dict], budget: int, max_segs: int) -> list[list
     return batches
 
 
-def build(work: Path, budget: int, max_segs: int) -> dict:
+def build(work: Path, budget: int, max_segs: int, only: str = "") -> dict:
     segments = C.read_jsonl(work / "segments.jsonl")
     if not segments:
         C.fail("no_segments: 先运行 scripts/segment.py")
+    scope = C.parse_id_ranges(only) if only else set()
+    if scope:
+        known = {s["id"] for s in segments}
+        unknown = sorted(scope - known)
+        if unknown:
+            C.fail(f"scope_unknown_ids: 这些段号不在 segments.jsonl 中：{unknown[:10]}")
+        segments = [s for s in segments if s["id"] in scope]
+        C.write_json(work / "scope.json", {"mode": "explicit", "ids": sorted(scope), "source": only})
+    elif (work / "scope.json").exists():
+        (work / "scope.json").unlink()
     locked = load_lock(work)
     batches = build_batches(segments, budget, max_segs)
 
@@ -140,6 +150,7 @@ def build(work: Path, budget: int, max_segs: int) -> dict:
         "ok": True,
         "packets": len(index),
         "segments": len(segments),
+        "scoped": bool(scope),
         "total_chars": sum(p["chars"] for p in index),
         "dir": str(packets_dir),
         "next": "逐个翻译 work/packets/packet_*.md，把结果写入 work/translation/<packet_id>.out.jsonl",
@@ -250,6 +261,7 @@ def main(argv=None) -> int:
     p_build = sub.add_parser("build", parents=[common])
     p_build.add_argument("--budget", type=int, default=DEFAULT_BUDGET)
     p_build.add_argument("--max-segments", type=int, default=DEFAULT_MAX_SEGS)
+    p_build.add_argument("--only", default="", help="只翻某区间，如 S0001-S0012,S0020（任务只要摘要/某节时用）")
     sub.add_parser("status", parents=[common])
     args = parser.parse_args(argv)
     for name, default in (("input", C.DEFAULT_INPUT), ("work", C.DEFAULT_WORK), ("output", C.DEFAULT_OUTPUT)):
@@ -258,7 +270,7 @@ def main(argv=None) -> int:
     dirs = C.dirs_from(args)
 
     if args.cmd == "build":
-        result = build(dirs.work, args.budget, args.max_segments)
+        result = build(dirs.work, args.budget, args.max_segments, args.only)
     else:
         result = status(dirs.work)
     print(json.dumps(result, ensure_ascii=False))

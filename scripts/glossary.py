@@ -288,9 +288,11 @@ def norm_zh(text: str) -> str:
     return text
 
 
-def check(work: Path, translations_path: Path | None = None, strict: bool = False) -> dict:
+def check(work: Path, translations_path: Path | None = None, strict: bool = False, ids: set[str] | None = None) -> dict:
     rows = read_glossary_tsv(work / "glossary.lock.tsv")
     segments = load_segments(work)
+    if ids:
+        segments = [s for s in segments if s["id"] in ids]
     translations = C.read_jsonl(translations_path or (work / "translations.jsonl"))
     zh_by_id = {t["id"]: t.get("zh", "") for t in translations}
     seg_by_id = {s["id"]: s for s in segments}

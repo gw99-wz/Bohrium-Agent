@@ -201,10 +201,13 @@ def check_segment(seg: dict, tr: dict | None) -> list[dict]:
 
 
 def run(work: Path, strict: bool) -> dict:
-    segments = C.read_jsonl(work / "segments.jsonl")
-    translations = C.read_jsonl(work / "translations.jsonl")
-    if not segments:
+    all_segments = C.read_jsonl(work / "segments.jsonl")
+    if not all_segments:
         C.fail("no_segments: 先运行 scripts/segment.py")
+    scope = C.read_json(work / "scope.json", None)
+    scoped_ids = set(scope.get("ids") or []) if isinstance(scope, dict) else set()
+    segments = [s for s in all_segments if s["id"] in scoped_ids] if scoped_ids else all_segments
+    translations = C.read_jsonl(work / "translations.jsonl")
     if not translations:
         C.fail("no_translations: 先翻译 work/packets/*.md 并写入 work/translation/*.out.jsonl，然后 check.py --merge")
 
@@ -217,7 +220,7 @@ def run(work: Path, strict: bool) -> dict:
     for sid in dup_ids:
         issues.append({"type": "duplicate", "severity": "error", "seg_id": sid, "detail": f"{sid} 出现多次译文"})
 
-    gloss = G.check(work, work / "translations.jsonl", strict=False)
+    gloss = G.check(work, work / "translations.jsonl", strict=False, ids=scoped_ids or None)
     issues.extend(gloss.get("issues", []) if isinstance(gloss, dict) else [])
 
     by_type = Counter(i["type"] for i in issues)
@@ -254,6 +257,7 @@ def run(work: Path, strict: bool) -> dict:
         "segments": total,
         "translated": translated,
         "missing": total - translated,
+        "scope": {"scoped": bool(scoped_ids), "ids": len(scoped_ids)} if scoped_ids else {"scoped": False},
         "rates": rates,
         "issue_counts": dict(by_type),
         "errors": len(errors),

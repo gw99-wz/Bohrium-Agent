@@ -276,6 +276,25 @@ def strip_front_matter(text: str) -> str:
     return text
 
 
+def parse_id_ranges(spec: str) -> set[str]:
+    """Parse 'S0001-S0012,S0020' into a set of segment ids."""
+    ids: set[str] = set()
+    for part in re.split(r"[,\s;，；]+", spec or ""):
+        part = part.strip()
+        if not part:
+            continue
+        m = re.fullmatch(r"S(\d{1,4})\s*[-–~]\s*S?(\d{1,4})", part, re.I)
+        if m:
+            start, end = int(m.group(1)), int(m.group(2))
+            lo, hi = min(start, end), max(start, end)
+            ids.update(f"S{n:04d}" for n in range(lo, hi + 1))
+            continue
+        m = re.fullmatch(r"S?(\d{1,4})", part, re.I)
+        if m:
+            ids.add(f"S{int(m.group(1)):04d}")
+    return ids
+
+
 def fail(message: str, code: int = 2):
     """Machine-readable failure: reason on stdout, exit code for the caller."""
     print(json.dumps({"ok": False, "error": message}, ensure_ascii=False))

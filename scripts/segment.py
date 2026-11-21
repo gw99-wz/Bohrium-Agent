@@ -175,6 +175,38 @@ def main(argv=None) -> int:
             }
         )
 
+    # ---- manual segments: pages the extractor cannot read (scanned pages, formulas
+    # supplied as images, tables transcribed by hand). They are appended after the
+    # automatic segments and counted in the coverage reconciliation like any other.
+    manual_rows = C.read_jsonl(dirs.work / "segments_manual.jsonl")
+    manual_chars: dict[int, int] = defaultdict(int)
+    for row in manual_rows:
+        text = C.normalize_space(row.get("text", ""))
+        if not text:
+            continue
+        page = int(row.get("page") or 1)
+        kind = row.get("kind") or "paragraph"
+        segments.append(
+            {
+                "id": f"S{len(segments) + 1:04d}",
+                "kind": kind,
+                "page": page,
+                "page_end": int(row.get("page_end") or page),
+                "section": row.get("section") or section,
+                "section_num": "",
+                "col": 0,
+                "chars": len(re.sub(r"\s", "", text)),
+                "text": text,
+                "block_ids": ["manual"],
+                "cross_page": False,
+                "merged": False,
+                "figure": "",
+                "status": "todo",
+                "source": "manual",
+            }
+        )
+        manual_chars[page] += len(re.sub(r"\s", "", text))
+
     # ---- coverage reconciliation, per page
     assigned: dict[int, int] = defaultdict(int)
     by_pid = {b["pid"]: b for b in blocks}
@@ -197,7 +229,7 @@ def main(argv=None) -> int:
     total_seg = 0
     for pno in range(1, pages + 1):
         total = page_totals.get(pno, 0)
-        inseg = assigned.get(pno, 0)
+        inseg = assigned.get(pno, 0) + manual_chars.get(pno, 0)
         furn = furniture_chars.get(pno, 0)
         denom = max(0, total - furn)
         ratio = round(inseg / denom, 4) if denom else 1.0
@@ -224,6 +256,7 @@ def main(argv=None) -> int:
             "chars_in_segments": total_seg,
             "char_ratio": round(total_seg / total_chars, 4) if total_chars else 1.0,
             "segments": len(segments),
+            "manual_segments": sum(1 for s in segments if s.get("source") == "manual"),
             "furniture_blocks_dropped": len(dropped),
             "images": len(image_blocks),
         },
